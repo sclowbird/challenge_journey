@@ -4,9 +4,11 @@
         <h2> How many brave souls participate? </h2>
 
         <form id="signup-form" @submit.prevent="processForm" v-for="(item, index) in participants" :key="index">
-           <p> {{ index + 1 }}</p>
+           <!-- <p> {{ index + 1 }}</p> -->
+           <!-- <p> {{ item.name }}</p> -->
            <!-- <input type="text" class="input" name="participants" v-model="participants" v-on:input="newPlayer"> -->
-           <input type="text" class="input" name="participants" v-model="participants.name">
+            <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer">
+
             
             <input type="submit" value="Submit">
         </form>
@@ -35,9 +37,9 @@
             },
 
             newPlayer: function() {
-                let inputForms = document.createElement("INPUT");
-                document.getElementById("signup-form").appendChild(inputForms);  
-
+                //let inputForms = document.createElement("INPUT");
+                //document.getElementById("signup-form").appendChild(inputForms);  
+                this.participants.push({ name: '' })
                 
 
             },
