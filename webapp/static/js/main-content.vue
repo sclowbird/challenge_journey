@@ -1,10 +1,17 @@
 <template>
     <div class="main-content">
-        <h1> This is your first component in Vue </h1>
-        <h2> Yeah. I can do all of this in plain JavaScript!</h2>
+        <h1> Challenge Journey</h1>
+        <h2> How many brave souls participate? </h2>
 
-        <input type="text" class="input" name="name" v-model="name">
-        <input type="email" class="input" name="email" v-model="email">
+        <form id="signup-form" @submit.prevent="processForm" v-for="(item, index) in participants" :key="index">
+           <p> {{ index + 1 }}</p>
+           <!-- <input type="text" class="input" name="participants" v-model="participants" v-on:input="newPlayer"> -->
+           <input type="text" class="input" name="participants" v-model="participants.name">
+            
+            <input type="submit" value="Submit">
+        </form>
+        
+             
     </div>
 </template>
 
@@ -12,14 +19,46 @@
     export default {
         name: "main-content",
         data: () => ({
+            //editIndex: null,
+            //originalData: null,
             // reactive data property of the component.
-            name: '',
-            email: ''
+            participants: [
+                { name: 'Enter name...'  }
+            ]
         }),
+
+        methods: {
+            processForm: function() {
+                console.log({ participants: this.participants });
+
+                          
+            },
+
+            newPlayer: function() {
+                let inputForms = document.createElement("INPUT");
+                document.getElementById("signup-form").appendChild(inputForms);  
+
+                
+
+            },
+
+            numberOfPlayers: function() {
+                console.log("test");
+                let elements = document.getElementsByTagName("input")
+
+                
+                /*
+                let attributeValue = "democlass-" + index;
+                document.getElementsByTagName("input")[index].setAttribute("class", "democlass");  
+                */  
+            }
+
+            
+        }
+    
+
     }
 
-    //https://scotch.io/courses/getting-started-with-vue/processing-a-form-with-vue
-    //hier weitermachen mit form submitten
 </script>
 
 <style scoped>
@@ -27,6 +66,11 @@
      * Some styles so that our first component
      * looks somewhat special
     */
+
+    .democlass {
+        color: red;
+    }
+
     .main-content {
         margin: 0 auto;
         font-family: sans-serif;
@@ -35,4 +79,6 @@
         border-radius: 5px;
         max-width: 500px;
     }
+
+
 </style>
