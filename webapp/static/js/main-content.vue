@@ -4,10 +4,11 @@
         <h2> How many brave souls participate? </h2>
 
         <form id="signup-form" @submit.prevent="processForm" v-for="(item, index) in participants" :key="index">
-           <!-- <p> {{ index + 1 }}</p> -->
            <!-- <p> {{ item.name }}</p> -->
-           <!-- <input type="text" class="input" name="participants" v-model="participants" v-on:input="newPlayer"> -->
-            <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer">
+            <input v-if="index == inputFields" type="text"  name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer">
+            <input v-else type="text"  name="participants" class="input" v-bind:id="`${index}`">
+
+            <!-- <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer"> -->
 
             
             <input type="submit" value="Submit">
@@ -21,9 +22,10 @@
     export default {
         name: "main-content",
         data: () => ({
-            //editIndex: null,
-            //originalData: null,
-            // reactive data property of the component.
+            //keeps track of the number of names currently entered
+            editIndex: null,
+            inputFields: 0,
+            //originalData: null, 
             participants: [
                 { name: 'Enter name...'  }
             ]
@@ -36,11 +38,29 @@
                           
             },
 
-            newPlayer: function() {
-                //let inputForms = document.createElement("INPUT");
-                //document.getElementById("signup-form").appendChild(inputForms);  
-                this.participants.push({ name: '' })
+            newPlayer: function() {                
+                this.editIndex = this.participants.length - 1 
+
+                    
+                let inputId = document.getElementsByClassName("INPUT")[this.inputFields];
+                let index = inputId.attributes[3].value;
+
+                console.log("this.editIndex: " + this.editIndex)
+                console.log("this.inputFields: " + this.inputFields)
+
+
                 
+                if(index == this.editIndex) {
+                    console.log("PUSHED")
+                    this.participants.push({ name: '' })
+                    this.inputFields += 1
+                    console.log("PUSHED this.inputFields: " + this.inputFields)
+                }
+                
+
+            },
+
+            removePlayer: function() {
 
             },
 
