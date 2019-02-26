@@ -3,16 +3,16 @@
         <h1> Challenge Journey</h1>
         <h2> How many brave souls participate? </h2>
 
-        <form id="signup-form" @submit.prevent="processForm" v-for="(item, index) in participants" :key="index">
-           <!-- <p> {{ item.name }}</p> -->
+        <form id="signup-form" @submit.prevent="processForm" v-for="(item, index) in participants" :key="index" v-on:input="checkEmptyField">
+            <p> {{ index }} </p>
             <input v-if="index == inputFields" type="text"  name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer">
-            <input v-else type="text"  name="participants" class="input" v-bind:id="`${index}`">
-
+            <input v-else type="text"  name="participants" class="input" v-bind:id="`test-${index}`">
             <!-- <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer"> -->
+        </form>
+        <input type="submit" value="Submit">
 
             
-            <input type="submit" value="Submit">
-        </form>
+            
         
              
     </div>
@@ -24,6 +24,7 @@
         data: () => ({
             //keeps track of the number of names currently entered
             editIndex: null,
+            //represents the number of created input fields
             inputFields: 0,
             //originalData: null, 
             participants: [
@@ -38,29 +39,39 @@
                           
             },
 
-            newPlayer: function() {                
-                this.editIndex = this.participants.length - 1 
-
-                    
+            newPlayer: function() {       
+                this.editIndex = this.participants.length - 1        
                 let inputId = document.getElementsByClassName("INPUT")[this.inputFields];
+                //third attribute of inputId is: v-bind:id="`${index}`"
                 let index = inputId.attributes[3].value;
-
-                console.log("this.editIndex: " + this.editIndex)
-                console.log("this.inputFields: " + this.inputFields)
-
 
                 
                 if(index == this.editIndex) {
-                    console.log("PUSHED")
                     this.participants.push({ name: '' })
                     this.inputFields += 1
-                    console.log("PUSHED this.inputFields: " + this.inputFields)
                 }
-                
 
+                //this.checkEmptyField()
+                
             },
 
-            removePlayer: function() {
+            // remove input field if it is empty
+            checkEmptyField: function() {
+                //console.log("Inputfields: " + this.inputFields)
+
+                let secondToLastInput = document.getElementsByClassName("INPUT")[this.inputFields - 1].value;
+                //console.log(secondToLastInput);
+
+                //check if input field is empty
+                if(secondToLastInput === "") {
+                    //console.log(`Field ${this.inputFields} is empty.`)
+                    this.participants.splice(this.inputFields - 1, 1);
+                } 
+
+
+                //don't remove the first input field, so there is at least one input field
+
+                //remove input field if field is empty and it is not the last input field
 
             },
 
