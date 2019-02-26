@@ -66,6 +66,7 @@
                 if(secondToLastInput === "") {
                     //console.log(`Field ${this.inputFields} is empty.`)
                     this.participants.splice(this.inputFields - 1, 1);
+                    this.inputFields -=1;
                 } 
 
 
