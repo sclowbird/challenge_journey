@@ -3,21 +3,19 @@
         <h1> Challenge Journey</h1>
         <h2> How many brave souls participate? </h2>
 
-        <form id="signup-form" @submit.prevent="processForm(item)" v-for="(item, index) in participants" :key="index" v-on:input="checkEmptyField">
+        <div v-for="(item, index) in participants" :key="index" v-on:input="checkEmptyField">
+            
             <input v-if="index == inputFields" type="text" name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer" v-model="item.name" placeholder="Namen eingeben..."> 
+            
             <input v-else type="text"  name="participants" class="input" v-bind:id="`Else-${index}`" v-model="item.name">
+            <br>
+            <br>
             <!-- <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer">-->          
-        </form>
-            <input type="submit" value="Submit">
+        </div>
+
 
         <p> {{ participants }}</p>
-            
-        
-
-            
-            
-        
-             
+                      
     </div>
 </template>
 
@@ -25,7 +23,6 @@
     export default {
         name: "main-content",
         data: () => ({
-            output: [],
             //keeps track of the number of names currently entered
             editIndex: null,
             //represents the number of created input fields
