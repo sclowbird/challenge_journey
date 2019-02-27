@@ -4,8 +4,8 @@
         <h2> How many brave souls participate? </h2>
 
         <form id="signup-form" @submit.prevent="processForm(item)" v-for="(item, index) in participants" :key="index" v-on:input="checkEmptyField">
-            <input v-if="index == inputFields" type="text" name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer" v-model="item.name"> 
-            <input v-else type="text"  name="participants" class="input" v-bind:id="`test-${index}`" v-model="item.name">
+            <input v-if="index == inputFields" type="text" name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer" v-model="item.name" placeholder="Namen eingeben..."> 
+            <input v-else type="text"  name="participants" class="input" v-bind:id="`Else-${index}`" v-model="item.name">
             <!-- <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer">-->          
         </form>
             <input type="submit" value="Submit">
@@ -32,7 +32,7 @@
             inputFields: 0,
             //originalData: null, 
             participants: [
-                { name: 'Enter name...'  }
+                { name: ''  }
             ]
         }),
 
