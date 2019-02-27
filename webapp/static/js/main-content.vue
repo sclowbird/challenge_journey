@@ -1,21 +1,21 @@
 <template>
     <div class="main-content">
+        <div class="nes-textarea textarea-color">
         <h1> Challenge Journey</h1>
         <h2> How many brave souls participate? </h2>
 
         <div v-for="(item, index) in participants" :key="index" v-on:input="checkEmptyField">
             
-            <input v-if="index == inputFields" type="text" name="participants" class="input" v-bind:id="`${index}`" v-on:input="newPlayer" v-model="item.name" placeholder="Namen eingeben..."> 
-            
-            <input v-else type="text"  name="participants" class="input" v-bind:id="`Else-${index}`" v-model="item.name">
-            <br>
-            <br>
+            <input v-if="index == inputFields" type="text" name="participants" class="input nes-input" v-bind:id="`${index}`" v-on:input="newPlayer" v-model="item.name" placeholder="Enter name...">        
+            <input v-else type="text"  name="participants" class="input nes-input" v-bind:id="`Else-${index}`" v-model="item.name">
+
             <!-- <input type="text" class="input" name="participants" v-model="participants.name" v-on:input="newPlayer">-->          
         </div>
 
-
         <p> {{ participants }}</p>
-                      
+        <button type="button" class="nes-btn is-error">Defeat</button>
+        <button type="button" class="nes-btn is-primary">Challenge accepted</button>
+    </div>
     </div>
 </template>
 
@@ -93,17 +93,20 @@
      * looks somewhat special
     */
 
-    .democlass {
-        color: red;
-    }
-
     .main-content {
         margin: 0 auto;
-        font-family: sans-serif;
-        background-color: #ccf7e2;
+        font-family: 'Press Start 2P', cursive;
         padding: 10px;
-        border-radius: 5px;
-        max-width: 500px;
+        max-width: 600px;
+    }
+
+    .textarea-color {
+        background-color: #86cfd0;
+    }
+
+
+    .input {
+        margin-bottom: 20px;
     }
 
 
