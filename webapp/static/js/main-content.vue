@@ -14,8 +14,8 @@
             </div>
 
             <p> {{ participants }}</p>
-            <button type="button" class="nes-btn is-error">Defeat</button>
-            <button type="button" class="nes-btn is-primary">Challenge accepted</button>
+            <button type="button" class="nes-btn is-error" @click="resetForm">Reset</button>
+            <button type="button" class="nes-btn is-primary" @click="processForm">Challenge accepted</button>
         </div>
     </div>
 </template>
@@ -28,16 +28,41 @@
             editIndex: null,
             //represents the number of created input fields
             inputFields: 0,
-            //originalData: null, 
+
             participants: [
                 { name: ''  }
             ]
         }),
 
         methods: {
-            processForm: function(item) {
-                //console.log({ participants: this.participants.name });  
+            processForm: function() {
+                let newArr = [];
+                let cleanedNames = "";
+
+                for(let n in this.participants) {
+                    cleanedNames = this.participants[n].name;
+                    cleanedNames = cleanedNames.trim();
+
+                    if(cleanedNames !== "") {
+                        newArr.push({ name: cleanedNames })
+                    }
+                  //  console.log(`Index: ${n}, Names: ${this.participants[n].name}`);
+                }
+     
+                let obj = newArr;
+                let objJSON = JSON.stringify(obj);
+                console.log(objJSON);
+                
+
+                //console.log(`${this.participants[0].name}`);
                 //console.log(this.participants[0].name);       
+            },
+
+            resetForm: function() {
+                this.participants = [ { name: ''  } ];
+                //this.participants.splice(-this.inputFields, this.inputFields);
+                this.inputFields = 0;
+                this.editIndex = null;
             },
 
             newPlayer: function() { 
@@ -91,7 +116,7 @@
                         let checkAllInputs = document.getElementsByClassName("INPUT")[i].value;
 
                         //if input field is empty, remove it
-                        if (checkAllInputs === "") {
+                        if (checkAllInputs === "" ) {
                             this.participants.splice(i, 1);
                             this.inputFields -= 1;
                         }
