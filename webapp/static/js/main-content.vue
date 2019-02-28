@@ -13,7 +13,6 @@
 
             </div>
 
-            <p> {{ participants }}</p>
             <button type="button" class="nes-btn is-error" @click="resetForm">Reset</button>
             <button type="button" class="nes-btn is-primary" @click="processForm">Challenge accepted</button>
         </div>
@@ -36,7 +35,7 @@
 
         methods: {
             processForm: function() {
-                let newArr = [];
+                let cleanedParticipants = [];
                 let cleanedNames = "";
 
                 for(let n in this.participants) {
@@ -44,13 +43,12 @@
                     cleanedNames = cleanedNames.trim();
 
                     if(cleanedNames !== "") {
-                        newArr.push({ name: cleanedNames })
+                        cleanedParticipants.push({ name: cleanedNames })
                     }
                   //  console.log(`Index: ${n}, Names: ${this.participants[n].name}`);
                 }
      
-                let obj = newArr;
-                let objJSON = JSON.stringify(obj);
+                let objJSON = JSON.stringify(cleanedParticipants);
                 console.log(objJSON);
                 
 
