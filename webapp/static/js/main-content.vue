@@ -15,6 +15,8 @@
 
             <button type="button" class="nes-btn is-error" @click="resetForm">Reset</button>
             <button type="button" class="nes-btn is-primary" @click="processForm">Challenge accepted</button>
+            
+            <p>{{ alert }}</p>
         </div>
     </div>
 </template>
@@ -30,11 +32,17 @@
 
             participants: [
                 { name: ''  }
-            ]
+            ],
+
+            alert: ""
         }),
 
         methods: {
             processForm: function() {
+                if(this.participants.length === 1) {
+                    this.alert = "Please enter at least one name."
+                }
+
                 let cleanedParticipants = [];
                 let cleanedNames = "";
 
@@ -61,6 +69,7 @@
                 //this.participants.splice(-this.inputFields, this.inputFields);
                 this.inputFields = 0;
                 this.editIndex = null;
+                this.alert = "";
             },
 
             newPlayer: function() { 
